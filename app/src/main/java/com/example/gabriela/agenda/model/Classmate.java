@@ -51,7 +51,7 @@ public class Classmate implements Serializable{
         this.site = site;
     }
 
-    public Double getStars() {
+    public int getStars() {
         return stars;
     }
 

@@ -30,6 +30,7 @@ public class FormActivity extends AppCompatActivity {
 
         item = getIntent().getExtras();
         Log.e("TESTE2", item.toString());
+        //setEditText(item);
 
 
         formHelper = new FormHelper(this);
@@ -43,8 +44,13 @@ public class FormActivity extends AppCompatActivity {
 
     }
 
-    public void setEditText(){
-//        nameForm.setText();
+    public void setEditText(Classmate classmate){
+
+        nameForm.setText(classmate.getName());
+        addressForm.setText(classmate.getAddress());
+        phoneForm.setText(classmate.getPhone());
+        siteForm.setText(classmate.getSite());
+        starsForm.setNumStars(classmate.getStars());
     }
 
     @Override
