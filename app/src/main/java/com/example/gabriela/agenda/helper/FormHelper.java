@@ -5,7 +5,7 @@ import android.widget.RatingBar;
 
 import com.example.gabriela.agenda.R;
 import com.example.gabriela.agenda.model.Classmate;
-import com.example.gabriela.agenda.view.FormActivity;
+import com.example.gabriela.agenda.view.ui.FormActivity;
 
 public class FormHelper {
     EditText nameForm,addressForm,phoneForm,siteForm ;

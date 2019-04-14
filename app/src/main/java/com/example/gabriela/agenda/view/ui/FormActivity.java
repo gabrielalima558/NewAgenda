@@ -1,4 +1,4 @@
-package com.example.gabriela.agenda.view;
+package com.example.gabriela.agenda.view.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +20,7 @@ public class FormActivity extends AppCompatActivity {
     private FormHelper formHelper;
     EditText nameForm, addressForm, phoneForm, siteForm;
     RatingBar starsForm;
+    Bundle item;
 
 
     @Override
@@ -27,7 +28,7 @@ public class FormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
-        Bundle item = getIntent().getExtras();
+        item = getIntent().getExtras();
         Log.e("TESTE2", item.toString());
 
 
