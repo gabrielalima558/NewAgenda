@@ -16,13 +16,16 @@ import android.widget.Toast;
 import com.example.gabriela.agenda.R;
 import com.example.gabriela.agenda.model.Classmate;
 import com.example.gabriela.agenda.model.service.ClassmateDAO;
+import com.example.gabriela.agenda.presenter.ListaInterfacePresenter;
+import com.example.gabriela.agenda.view.contact.ListaItensInterface;
 
 import java.util.List;
 
-public class ListaItensActivity extends AppCompatActivity {
+public class ListaItensActivity extends AppCompatActivity implements ListaItensInterface{
 
     private ListView listaAlunos;
     private Button btnNew;
+    private ListaInterfacePresenter listaInterfacePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +45,14 @@ public class ListaItensActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(listaAlunos);
+
+        listaInterfacePresenter = new ListaInterfacePresenter(this, ListaItensActivity.this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadList();
-    }
-
-    private void loadList() {
-        ClassmateDAO classmateDAO = new ClassmateDAO(this);
-        List<Classmate> classmates = classmateDAO.getClassmate();
-        classmateDAO.close();
-
-        ArrayAdapter<Classmate> adapter = new ArrayAdapter<Classmate>(this, android.R.layout.simple_list_item_1, classmates);
-        listaAlunos.setAdapter(adapter);
+        listaInterfacePresenter.loadList(listaAlunos);
     }
 
     @Override
@@ -78,9 +74,9 @@ public class ListaItensActivity extends AppCompatActivity {
                 ClassmateDAO classmateDAO = new ClassmateDAO(ListaItensActivity.this);
                 classmateDAO.delete(classmate);
                 classmateDAO.close();
-                loadList();
+                listaInterfacePresenter.loadList(listaAlunos);
 
-                Toast.makeText(getApplicationContext(), "Excluir aluno: " + classmate.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Excluir item: " + classmate.getName(), Toast.LENGTH_LONG).show();
                 return false;
             }
         });
@@ -90,7 +86,7 @@ public class ListaItensActivity extends AppCompatActivity {
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 Classmate item = (Classmate) listaAlunos.getItemAtPosition(info.position);
 
-                Intent intent = new Intent(ListaItensActivity.this, FormActivity.class);
+                Intent intent = new Intent(ListaItensActivity.this, EditActivity.class);
                 intent.putExtra("item", item);
                 startActivity(intent);
                 Log.e("TESTE", item.toString());

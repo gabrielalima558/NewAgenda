@@ -62,7 +62,7 @@ public class ClassmateDAO extends SQLiteOpenHelper {
             classmate.setAddress(cursor.getString(cursor.getColumnIndex("address")));
             classmate.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
             classmate.setSite(cursor.getString(cursor.getColumnIndex("site")));
-            classmate.setStars(cursor.getDouble(cursor.getColumnIndex("stars")));
+            classmate.setStars(cursor.getInt(cursor.getColumnIndex("stars")));
 
             classmateList.add(classmate);
         }
