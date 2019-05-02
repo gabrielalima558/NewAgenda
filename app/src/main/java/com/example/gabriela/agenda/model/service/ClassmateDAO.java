@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.gabriela.agenda.model.Classmate;
 
@@ -75,5 +76,29 @@ public class ClassmateDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         String params = (classmate.getId().toString());
         db.delete("classmate", "id = ?", new String[]{params});
+    }
+
+    public boolean update(Classmate classmate){
+        ContentValues data = new ContentValues();
+        data.put("name", classmate.getName());
+        data.put("address", classmate.getAddress());
+        data.put("phone", classmate.getPhone());
+        data.put("site", classmate.getSite());
+        data.put("stars", classmate.getStars());
+
+        String where = "id = ?";
+
+        String[] whereArgs = {Long.toString(classmate.getId())};
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        boolean isUpdate = db.update("classmate", data, where, whereArgs) > 0;
+
+        db.close();
+
+        Log.e("Editar", "classmate"+ data + where + whereArgs);
+        Log.e("UPDATE", String.valueOf(isUpdate));
+
+        return isUpdate;
     }
 }
