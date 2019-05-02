@@ -1,4 +1,4 @@
-package com.example.gabriela.agenda.helper;
+package com.example.gabriela.agenda.view.helper;
 
 import android.widget.EditText;
 import android.widget.RatingBar;

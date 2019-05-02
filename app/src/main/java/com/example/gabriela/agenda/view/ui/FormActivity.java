@@ -2,30 +2,30 @@ package com.example.gabriela.agenda.view.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
-import com.example.gabriela.agenda.helper.FormHelper;
+import com.example.gabriela.agenda.view.helper.FormHelper;
 import com.example.gabriela.agenda.R;
-import com.example.gabriela.agenda.model.Classmate;
-import com.example.gabriela.agenda.model.service.ClassmateDAO;
+import com.example.gabriela.agenda.presenter.FormActivityPresenter;
+import com.example.gabriela.agenda.view.contact.FormInterface;
 
-public class FormActivity extends AppCompatActivity {
+public class FormActivity extends AppCompatActivity implements FormInterface{
 
     private FormHelper formHelper;
     EditText nameForm, addressForm, phoneForm, siteForm;
     RatingBar starsForm;
-
+    FormActivityPresenter formActivityPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        formActivityPresenter = new FormActivityPresenter(this, FormActivity.this);
 
         formHelper = new FormHelper(this);
 
@@ -51,14 +51,7 @@ public class FormActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_ok:
 
-                Classmate classmate = formHelper.getClassmate();
-
-                ClassmateDAO classmateDAO = new ClassmateDAO(this);
-                classmateDAO.insertClassmate(classmate);
-                classmateDAO.close();
-
-                Toast.makeText(getApplicationContext(), "Item: " + classmate.getName() + " Salvo!", Toast.LENGTH_LONG).show();
-                finish();
+                formActivityPresenter.insertItem(formHelper, this);
                 break;
         }
 
