@@ -20,17 +20,12 @@ public class FormActivity extends AppCompatActivity {
     private FormHelper formHelper;
     EditText nameForm, addressForm, phoneForm, siteForm;
     RatingBar starsForm;
-    Bundle item;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-
-        item = getIntent().getExtras();
-        Log.e("TESTE2", item.toString());
-
 
         formHelper = new FormHelper(this);
 
@@ -41,10 +36,6 @@ public class FormActivity extends AppCompatActivity {
         starsForm = findViewById(R.id.stars_bar);
 
 
-    }
-
-    public void setEditText(){
-//        nameForm.setText();
     }
 
     @Override
@@ -66,7 +57,7 @@ public class FormActivity extends AppCompatActivity {
                 classmateDAO.insertClassmate(classmate);
                 classmateDAO.close();
 
-                Toast.makeText(getApplicationContext(), "Classmate: " + classmate.getName() + " Safe!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Item: " + classmate.getName() + " Salvo!", Toast.LENGTH_LONG).show();
                 finish();
                 break;
         }

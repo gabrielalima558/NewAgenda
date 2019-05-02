@@ -26,7 +26,7 @@ public class FormHelper {
         classmate.setAddress(addressForm.getText().toString());
         classmate.setPhone(phoneForm.getText().toString());
         classmate.setSite(siteForm.getText().toString());
-        classmate.setStars(Double.valueOf(starsForm.getProgress()));
+        classmate.setStars(Integer.valueOf(starsForm.getProgress()));
         return classmate;
     }
 }

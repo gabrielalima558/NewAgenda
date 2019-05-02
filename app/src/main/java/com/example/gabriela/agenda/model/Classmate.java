@@ -8,7 +8,7 @@ public class Classmate implements Serializable{
     private String address;
     private String phone;
     private String site;
-    private Double stars;
+    private int stars;
 
 
     public Long getId() {
@@ -51,11 +51,11 @@ public class Classmate implements Serializable{
         this.site = site;
     }
 
-    public Double getStars() {
+    public int getStars() {
         return stars;
     }
 
-    public void setStars(Double stars) {
+    public void setStars(int stars) {
         this.stars = stars;
     }
 
