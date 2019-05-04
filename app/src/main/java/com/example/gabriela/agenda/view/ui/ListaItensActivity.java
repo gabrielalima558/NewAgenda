@@ -47,6 +47,15 @@ public class ListaItensActivity extends AppCompatActivity implements ListaItensI
         registerForContextMenu(listaAlunos);
 
         listaInterfacePresenter = new ListaInterfacePresenter(this, ListaItensActivity.this);
+
+        listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Classmate item = (Classmate) listaAlunos.getItemAtPosition(i);
+                Log.e("TESTE", String.valueOf(item));
+                redirectActivityEdit(item);
+            }
+        });
     }
 
     @Override
@@ -61,40 +70,31 @@ public class ListaItensActivity extends AppCompatActivity implements ListaItensI
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
         MenuItem delete = menu.add("Excluir");
-        MenuItem editar = menu.add("Editar");
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 Classmate classmate = (Classmate) listaAlunos.getItemAtPosition(info.position);
 
-                ClassmateDAO classmateDAO = new ClassmateDAO(ListaItensActivity.this);
-                classmateDAO.delete(classmate);
-                classmateDAO.close();
+                listaInterfacePresenter.deleteItem(classmate);
                 listaInterfacePresenter.loadList(listaAlunos);
 
-                Toast.makeText(getApplicationContext(), "Excluir item: " + classmate.getName(), Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
-        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem Item) {
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Classmate item = (Classmate) listaAlunos.getItemAtPosition(info.position);
-
-                Intent intent = new Intent(ListaItensActivity.this, EditActivity.class);
-                intent.putExtra("item", item);
-                startActivity(intent);
-                Log.e("TESTE", item.toString());
-
+                Toast.makeText(getApplicationContext(), "Item: " + classmate.getName() + "Excluído", Toast.LENGTH_LONG).show();
                 return false;
             }
         });
 
     }
 
+    @Override
+    public void redirectActivityEdit(Classmate item) {
+        Intent intent = new Intent(ListaItensActivity.this, EditActivity.class);
+        intent.putExtra("item", item);
+        startActivity(intent);
+
+    }
 }

@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.example.gabriela.agenda.model.Classmate;
 import com.example.gabriela.agenda.model.service.ClassmateDAO;
 import com.example.gabriela.agenda.view.contact.ListaItensInterface;
+import com.example.gabriela.agenda.view.ui.ListaItensActivity;
 
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class ListaInterfacePresenter {
 
         ArrayAdapter<Classmate> adapter = new ArrayAdapter<Classmate>(activity, android.R.layout.simple_list_item_1, classmates);
         listaAlunos.setAdapter(adapter);
+    }
+    public void deleteItem(Classmate classmate){
+        ClassmateDAO classmateDAO = new ClassmateDAO(activity);
+        classmateDAO.delete(classmate);
+        classmateDAO.close();
     }
 }

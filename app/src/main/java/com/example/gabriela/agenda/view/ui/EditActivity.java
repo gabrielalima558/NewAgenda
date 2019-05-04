@@ -3,6 +3,9 @@ package com.example.gabriela.agenda.view.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -40,17 +43,28 @@ public class EditActivity extends AppCompatActivity implements EditInterface {
 
     }
 
-
-    public void editarBtn(View view) {
-        editPresenter.updateItem(this, editName, editAddress, editPhone, editSite, starsBar);
-        redirectActivity();
-    }
-
     @Override
     public void redirectActivity() {
         finish();
         Intent intent = new Intent(this, ListaItensActivity.class);
         startActivity(intent);
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_form, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_ok:
+                editPresenter.updateItem(this, editName, editAddress, editPhone, editSite, starsBar);
+                redirectActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

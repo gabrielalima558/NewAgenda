@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
         android:text="+"
-        android:textSize="41sp"
+        android:textSize="35sp"
         android:textColor="#ffffff"
         android:textAlignment="center"
         android:id="@+id/btn_new"
