@@ -44,7 +44,7 @@ public class EditPresenter {
         item.setAddress(editAddress.getText().toString());
         item.setPhone(editPhone.getText().toString());
         item.setSite(editSite.getText().toString());
-        item.setStars(starsBar.getNumStars());
+        item.setStars(Integer.valueOf(starsBar.getProgress()-2));
         ClassmateDAO classmateDAO = new ClassmateDAO(context);
         classmateDAO.update(item);
         classmateDAO.close();
