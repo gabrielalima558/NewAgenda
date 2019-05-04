@@ -97,4 +97,10 @@ public class ListaItensActivity extends AppCompatActivity implements ListaItensI
         startActivity(intent);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
 }
