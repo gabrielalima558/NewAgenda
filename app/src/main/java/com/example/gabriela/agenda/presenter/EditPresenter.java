@@ -36,6 +36,7 @@ public class EditPresenter {
         editPhone.setText(item.getPhone());
         editSite.setText(item.getSite());
         starsBar.setRating(item.getStars());
+        Log.e("Stars", String.valueOf(item.getStars()));
     }
 
     public void updateItem(Context context, EditText editName, EditText editAddress, EditText editPhone, EditText editSite, RatingBar starsBar){
@@ -44,7 +45,7 @@ public class EditPresenter {
         item.setAddress(editAddress.getText().toString());
         item.setPhone(editPhone.getText().toString());
         item.setSite(editSite.getText().toString());
-        item.setStars(Integer.valueOf(starsBar.getProgress()-2));
+        item.setStars(Integer.valueOf(starsBar.getProgress()/2));
         ClassmateDAO classmateDAO = new ClassmateDAO(context);
         classmateDAO.update(item);
         classmateDAO.close();
