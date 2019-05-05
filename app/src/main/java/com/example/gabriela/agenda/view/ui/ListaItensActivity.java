@@ -83,7 +83,7 @@ public class ListaItensActivity extends AppCompatActivity implements ListaItensI
                 listaInterfacePresenter.deleteItem(classmate);
                 listaInterfacePresenter.loadList(listaAlunos);
 
-                Toast.makeText(getApplicationContext(), "Item: " + classmate.getName() + "Excluído", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Item: " + classmate.getName() + " Excluído", Toast.LENGTH_LONG).show();
                 return false;
             }
         });
